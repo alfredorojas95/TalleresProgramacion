@@ -1,0 +1,11 @@
+package vista;
+import modelo.*;
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		modelo.Calculo.imprimirMatriz(modelo.Calculo.llenarMatriz(5,4,2));
+	}
+
+}

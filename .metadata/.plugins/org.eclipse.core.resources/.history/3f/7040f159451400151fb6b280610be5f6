@@ -1,0 +1,9 @@
+package modelo;
+
+public class Calculo {
+	
+	private int fila;
+	private int columna;
+	
+	public Calculo(int )
+}

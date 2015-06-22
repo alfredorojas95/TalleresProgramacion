@@ -1,0 +1,64 @@
+package modelo;
+
+public class Calculo {
+
+	private int participantes;
+	private int tareas;
+
+	public Calculo(int participantes, int tareas) {
+		this.participantes = participantes;
+		this.tareas = tareas;
+	}
+	
+	public Calculo(){
+		
+	}
+
+	public int getParticipantes() {
+		return participantes;
+	}
+
+	public void setParticipantes(int participantes) {
+		this.participantes = participantes;
+	}
+
+	public int getTareas() {
+		return tareas;
+	}
+
+	public void setTareas(int tareas) {
+		this.tareas = tareas;
+	}
+
+	/**
+	 * este método simula la obtenion de las entradas por medio de un archivo de texto
+	 * @param participantes
+	 * @param tareas
+	 * @param homero
+	 * @return
+	 */
+	public static int[][] obtenerTareas(int participantes, int tareas, int homero) {
+
+		int[][] estadoTareas = new int[participantes][tareas];
+		
+		for (int i = 0; i < estadoTareas.length; i++) {
+			for (int j = 0; j < estadoTareas[i].length; j++) {
+				estadoTareas[i][j]=(int)(Math.random()*2);
+			}
+		}
+		return estadoTareas;
+	}
+	
+	
+	public static void imprimirMatriz(int[][]matriz){
+		String cadena="";
+		for (int i = 0; i < matriz.length; i++) {
+			for (int j = 0; j < matriz[i].length; j++) {
+				cadena+= matriz[i][j]+ "  ";
+			}
+			cadena+="\n";
+		}
+		System.out.println(cadena);
+	}
+	
+}

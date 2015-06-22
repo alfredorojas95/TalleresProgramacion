@@ -1,0 +1,10 @@
+package vista;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		modelo.Calculo.imprimirMatriz(modelo.Calculo.obtenerTareas(5,4));
+	}
+
+}
