@@ -1,0 +1,103 @@
+package modelo;
+
+public class Calculo {
+
+	private int participantes;
+	private int tareas;
+
+	public Calculo(int participantes, int tareas) {
+		this.participantes = participantes;
+		this.tareas = tareas;
+	}
+	
+	public Calculo(){
+		
+	}
+
+	public int getParticipantes() {
+		return participantes;
+	}
+
+	public void setParticipantes(int participantes) {
+		this.participantes = participantes;
+	}
+
+	public int getTareas() {
+		return tareas;
+	}
+
+	public void setTareas(int tareas) {
+		this.tareas = tareas;
+	}
+
+	/**
+	 * este método simula la obtencion de las entradas (0 y 1) 
+	 * @param participantes
+	 * @param tareas
+	 * @param homero
+	 * @return
+	 */
+	public static int[][] obtenerTareas(int participantes, int cantTareas) {
+
+		int[][] estadoTareas = new int[participantes][cantTareas];
+		
+		for (int i = 0; i < estadoTareas.length; i++) {
+			for (int j = 0; j < estadoTareas[i].length; j++) {
+				estadoTareas[i][j]=(int)(Math.random()*2);
+			}
+		}
+		return estadoTareas;
+	}
+	
+	/**
+	 * este método cuenta la cantidad de ceros en las filas de la matriz para 
+	 * asi asignar un puntaje a las preguntas
+	 * @param tareas
+	 * @param cantTareas
+	 */
+	public static int[] definirPuntajes(int [][]tareas, int fila, int columna){
+		int[]puntajesReguntas = new int[columna];
+		int contador=0;
+		
+		for (int i = 0; i < columna; i++) {
+			contador=0;
+			for (int j = 0; j < fila; j++) {
+				if(tareas[j][i]==0){
+					contador++;
+				}
+			}
+			puntajesReguntas[i]=contador;
+			System.out.println(puntajesReguntas[i]);
+		}
+		return puntajesReguntas;
+	}
+	
+	public static void asignarPuntajes(int[][]estadoTareas, int[]puntajePreguntas, int participantes){
+		
+		int[] puntajeparticipantes = new int [participantes];
+		
+		for (int i = 0; i < estadoTareas.length; i++) {
+			for (int j = 0; j < estadoTareas[i].length; j++) {
+				if(estadoTareas[i][j]==1){
+					puntajeparticipantes[i]+=puntajePreguntas[i];
+				}
+				
+			}
+			System.out.println("El participante n° "+(i+1)+" tiene un puntaje de "+puntajeparticipantes[i]);
+		}
+		
+	}
+	
+	
+	public static void imprimirMatriz(int[][]matriz){
+		String cadena="";
+		for (int i = 0; i < matriz.length; i++) {
+			for (int j = 0; j < matriz[i].length; j++) {
+				cadena+= matriz[i][j]+ "  ";
+			}
+			cadena+="\n";
+		}
+		System.out.println(cadena);
+	}
+	
+}

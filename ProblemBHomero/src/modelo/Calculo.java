@@ -31,15 +31,15 @@ public class Calculo {
 	}
 
 	/**
-	 * este método simula la obtenion de las entradas por medio de un archivo de texto
+	 * este método simula la obtencion de las entradas (0 y 1) 
 	 * @param participantes
 	 * @param tareas
 	 * @param homero
 	 * @return
 	 */
-	public static int[][] obtenerTareas(int participantes, int tareas) {
+	public static int[][] obtenerTareas(int participantes, int cantTareas) {
 
-		int[][] estadoTareas = new int[participantes][tareas];
+		int[][] estadoTareas = new int[participantes][cantTareas];
 		
 		for (int i = 0; i < estadoTareas.length; i++) {
 			for (int j = 0; j < estadoTareas[i].length; j++) {
@@ -49,33 +49,74 @@ public class Calculo {
 		return estadoTareas;
 	}
 	
-	public static void definirPuntajes(int [][]tareas, int cantTareas){
-		int[]puntajes = new int[cantTareas];//
+	/**
+	 * este método cuenta la cantidad de ceros en las filas de la matriz para 
+	 * asi asignar un puntaje a las preguntas
+	 * @param tareas
+	 * @param cantTareas
+	 */
+	public static int[] definirPuntajes(int [][]tareas, int fila, int columna){
+		int[]puntajesReguntas = new int[columna];
 		int contador=0;
-		for (int i = 0; i < tareas.length; i++) {
+		
+		for (int i = 0; i < columna; i++) {
 			contador=0;
-			for (int j = 0; j < tareas[i].length; j++) {
+			for (int j = 0; j < fila; j++) {
 				if(tareas[j][i]==0){
 					contador++;
 				}
 			}
-			puntajes[i]=contador;
-			System.out.println(puntajes[i]);
+			puntajesReguntas[i]=contador;
+			System.out.println(puntajesReguntas[i]);
 		}
+		return puntajesReguntas;
 	}
 	
-	public static void asignarPuntajes(int[][]estadoTareas, int[]puntajePreguntas, int participantes){
+	public static void asignarPuntajes(int[][]estadoTareas, int[]puntajePreguntas, int cantParticipantes, int cantTareas){
 		
-		int[] puntajeparticipantes = new int [participantes];
+		int[] puntajeparticipantes = new int [cantParticipantes];
+		int puntaje=0;
 		
-		for (int i = 0; i < estadoTareas.length; i++) {
-			for (int j = 0; j < estadoTareas[i].length; j++) {
+		for (int i = 0; i < cantParticipantes; i++) {
+			puntaje=0;
+			for (int j = 0; j < cantTareas; j++) {
 				if(estadoTareas[i][j]==1){
-					puntajeparticipantes[i]+=puntajePreguntas[i];
+					puntaje+=puntajePreguntas[j];
 				}
+				puntajeparticipantes[i]=puntaje;
 			}
+			System.out.println("El participante n° "+(i+1)+" tiene un puntaje de "+puntajeparticipantes[i]);
+		}
+		//System.out.println("largo "+puntajeparticipantes.length);
+	}
+	
+	public static int[][] ordenarPuntajes(int[]puntajes, int cantParticipantes){
+		int aux= 0;
+		int temporal=0;
+		int[][] rankingJugadores = new int [2][cantParticipantes];
+		
+		int[] posicionesParticipantes = new int[cantParticipantes];
+		int[]puntajesOrdenados = new int[cantParticipantes];
+		
+		for (int i = 0; i < puntajes.length; i++) {
+			for (int j = 0; j < puntajes.length; j++) {
+		           if (puntajes[i] > puntajes[j]) {       //> 0 < define el orden del arreglo, menor a mayor o viceversa 
+	                    aux = puntajes[i];
+	                    puntajes[i] = puntajes[j];
+	                    puntajes[j] = aux;   
+	                    temporal=i;
+	                }
+			}
+			posicionesParticipantes[i]=(temporal+1);
+			rankingJugadores[i][0]= puntajes[i];
+			rankingJugadores[i][1]= temporal+1;
 		}
 		
+//		for (int i = 0; i < puntajes.length; i++) {
+//			rankingJugadores[i][0]= posicionesParticipantes[i];
+//			rankingJugadores[i][1]= puntajes[i];
+//		}
+		return rankingJugadores;
 	}
 	
 	

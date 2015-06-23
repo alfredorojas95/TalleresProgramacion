@@ -1,0 +1,13 @@
+package vista;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		int[][] estado = modelo.Calculo.obtenerTareas(12,8);
+		modelo.Calculo.imprimirMatriz(estado);
+		modelo.Calculo.definirPuntajes(estado,12, 8);
+		
+	}
+
+}
